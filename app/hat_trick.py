@@ -8,8 +8,11 @@ def hat_trick(payload: Payload) -> Payload:
     placed_learners.extend(map(lambda p: p.teamMemberSmtIds, payload.projects))
 
     for learner in payload.learners:
+
         # Can it be the case that one is set but the other is not?!
-        if learner.lambdaId in placed_learners and learner.labsProject != "":
+        if learner.lambdaId in placed_learners:
+            continue
+        if learner.labsProject != "":
             continue
 
         project_id = random_project()
@@ -21,4 +24,5 @@ def hat_trick(payload: Payload) -> Payload:
         payload.projects[project_id].teamMemberSmtIds.append(learner.lambdaId)
         team_name = f"{product_name} - {team_code}"
         learner.labsProject = team_name
+
     return payload
