@@ -27,6 +27,15 @@ def hat_trick(payload: Payload) -> Payload:
             #     project.teamMemberSmtIds.append(learner.lambdaId)
             continue
 
+        least_members = min(len(project.teamMemberSmtIds) for project in payload.projects)
+
+        if learner.track == "Web":
+            for project in payload.projects:
+                if len(project.teamMemberSmtIds) == least_members:
+                    project.teamMemberSmtIds.append(learner.lambdaId)
+                    learner.labsProject = get_team_name(project)
+                    break
+
         project_id = random_project()
         while learner.track not in payload.projects[project_id].tracks:
             project_id = random_project()
