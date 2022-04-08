@@ -60,4 +60,5 @@ class MongoDB:
 
 if __name__ == '__main__':
     db = MongoDB()
-    db.backup(f'backups/{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.json')
+    filename = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    db.backup(f'backups/{filename}.json')
