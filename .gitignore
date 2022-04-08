@@ -1,6 +1,7 @@
 venv/
 .env
 scratch.py
+app/backups/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

@@ -1,3 +1,4 @@
+app/backups/
 notebooks/
 venv/
 .env
