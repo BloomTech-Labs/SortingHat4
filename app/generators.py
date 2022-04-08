@@ -40,9 +40,10 @@ def percent_true(num: int = 50) -> bool:
 
 
 def random_track():
-    weights = [55, 33, 11]
+    weights = [50, 30, 10]
     values = ["Web", "DS", "BD"]
-    return choices(values, weights)[0]
+    result, *_ = choices(values, weights)
+    return result
 
 
 class NameGenerator:

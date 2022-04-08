@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 from typing import Dict, Iterable, Iterator, Optional
@@ -55,3 +56,8 @@ class MongoDB:
             "database": self.database,
             "collection": self.collection,
         }
+
+
+if __name__ == '__main__':
+    db = MongoDB()
+    db.backup(f'backups/{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.json')
