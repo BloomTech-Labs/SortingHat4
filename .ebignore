@@ -1,3 +1,6 @@
-.env
+notebooks/
 venv/
+.env
+payload.json.js
+requirements-dev.txt
 scratch.py
