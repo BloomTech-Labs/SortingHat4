@@ -34,12 +34,12 @@ def hat_trick(payload: Payload) -> Payload:
                     project.teamMemberSmtIds.append(learner.lambdaId)
                     learner.labsProject = get_team_name(project)
                     break
-
-        project_id = random_project()
-        while learner.track not in payload.projects[project_id].tracks:
+        else:
             project_id = random_project()
+            while learner.track not in payload.projects[project_id].tracks:
+                project_id = random_project()
 
-        payload.projects[project_id].teamMemberSmtIds.append(learner.lambdaId)
-        learner.labsProject = get_team_name(payload.projects[project_id])
+            payload.projects[project_id].teamMemberSmtIds.append(learner.lambdaId)
+            learner.labsProject = get_team_name(payload.projects[project_id])
 
     return payload
