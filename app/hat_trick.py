@@ -27,11 +27,10 @@ def hat_trick(payload: Payload) -> Payload:
             #     project.teamMemberSmtIds.append(learner.lambdaId)
             continue
 
-        least_members = min(len(project.teamMemberSmtIds) for project in payload.projects)
-
         if learner.track == "Web":
+            small = min(len(project.teamMemberSmtIds) for project in payload.projects)
             for project in payload.projects:
-                if len(project.teamMemberSmtIds) == least_members:
+                if len(project.teamMemberSmtIds) == small:
                     project.teamMemberSmtIds.append(learner.lambdaId)
                     learner.labsProject = get_team_name(project)
                     break

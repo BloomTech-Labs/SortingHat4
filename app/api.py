@@ -43,8 +43,15 @@ async def logs(query: Optional[Dict] = None):
 
 @API.post("/sortinghat")
 async def sortinghat(payload: Payload) -> Payload:
+    API.logger.insert({
+        "type": "pre-sort",
+        "metadata": await info(),
+        "projects": list(map(vars, payload.projects)),
+        "learners": list(map(vars, payload.learners)),
+    })
     result: Payload = hat_trick(payload)
     API.logger.insert({
+        "type": "post-sort",
         "metadata": await info(),
         "projects": list(map(vars, result.projects)),
         "learners": list(map(vars, result.learners)),
