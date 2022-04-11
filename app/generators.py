@@ -40,7 +40,7 @@ def percent_true(num: int = 50) -> bool:
 
 
 def random_track():
-    weights = [50, 30, 10]
+    weights = [40, 30, 0]
     values = ["Web", "DS", "BD"]
     result, *_ = choices(values, weights)
     return result

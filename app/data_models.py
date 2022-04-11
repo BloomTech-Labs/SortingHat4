@@ -154,7 +154,7 @@ class Payload(BaseModel):
         tpmInterest2=randint(1, 4),
         tpmInterest3=randint(1, 4),
         tpmInterest4=randint(1, 4),
-    ) for _ in range(50)]
+    ) for _ in range(45)]
     projects: List[Project] = [
         Project(
             id=generate_uuid(8),
@@ -184,11 +184,4 @@ class Payload(BaseModel):
             releaseManager=NameGenerator.generate_name(),
             tracks=["Web", "DS"]
         ),
-        Project(
-            id=generate_uuid(8),
-            product="Test Product",
-            teamCode="E",
-            releaseManager=NameGenerator.generate_name(),
-            tracks=["Web", "BD"]
-        )
     ]
