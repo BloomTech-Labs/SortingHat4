@@ -5,3 +5,5 @@ venv/
 payload.json.js
 requirements-dev.txt
 scratch.py
+.idea/
+run.sh
