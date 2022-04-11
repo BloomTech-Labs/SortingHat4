@@ -42,14 +42,14 @@ class Learner(BaseModel):
     mlOpsInterest1: Optional[int] = 0
     mlOpsInterest2: Optional[int] = 0
     mlOpsInterest3: Optional[int] = 0
-    tpmSkillRank: Optional[float]
-    tpmInterestRank: Optional[float]
-    uxInterestRank: Optional[float]
-    frontendInterestRank: Optional[float]
-    backendInterestRank: Optional[float]
-    dataEngInterestRank: Optional[float]
-    mlEngInterestRank: Optional[float]
-    mlOpsInterestRank: Optional[float]
+    tpmSkillRank: Optional[float] = 0
+    tpmInterestRank: Optional[float] = 0
+    uxInterestRank: Optional[float] = 0
+    frontendInterestRank: Optional[float] = 0
+    backendInterestRank: Optional[float] = 0
+    dataEngInterestRank: Optional[float] = 0
+    mlEngInterestRank: Optional[float] = 0
+    mlOpsInterestRank: Optional[float] = 0
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -86,7 +86,15 @@ class Learner(BaseModel):
                 self.backendInterest2,
             ]) / 8
 
+            self.dataEngInterestRank = 0
+            self.mlEngInterestRank = 0
+            self.mlOpsInterestRank = 0
+
         elif self.track == "DS":
+            self.uxInterestRank = 0
+            self.frontendInterestRank = 0
+            self.backendInterestRank = 0
+
             self.dataEngInterest1 = randint(1, 4)
             self.dataEngInterest2 = randint(1, 4)
             self.dataEngInterest3 = randint(1, 4)
