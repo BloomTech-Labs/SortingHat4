@@ -1,5 +1,4 @@
 from app.data_models import Payload, Project
-from app.generators import TruffleShuffle
 
 
 def get_team_name(project: Project) -> str:
@@ -9,18 +8,71 @@ def get_team_name(project: Project) -> str:
 
 
 def hat_trick(payload: Payload) -> Payload:
-    random_project = TruffleShuffle(range(len(payload.projects)))
+
+    project_lookup = {
+        project.id: idx for idx, project in enumerate(payload.projects)
+    }
+    learner_lookup = {
+        learner.lambdaId: idx for idx, learner in enumerate(payload.learners)
+    }
+
+    tpms = sorted(payload.learners, key=lambda x: x.tpmInterestRank)
+    ds_tpms = list(filter(lambda x: x.track == "DS", tpms))
+    web_tpms = list(filter(lambda x: x.track == "Web", tpms))
+
+    project_ids = map(lambda x: x.id, payload.projects)
+    ds_project_ids = map(lambda x: x.id, filter(lambda x: "DS" in x.tracks, payload.projects))
+    web_project_ids = map(lambda x: x.id, filter(lambda x: len(x.tracks) == 1, payload.projects))
+
+    placed = set()
+
+    for project in payload.projects:
+        placed.union(project.teamMemberSmtIds)
 
     for learner in payload.learners:
-
         if learner.labsProject != "":
-            continue
+            placed.add(learner.lambdaId)
 
-        project_id = random_project()
-        while learner.track not in payload.projects[project_id].tracks:
-            project_id = random_project()
+    def place_learner(learner_id: str, project_idx: str):
+        placed.add(learner_id)
+        payload.projects[
+            project_lookup[project_idx]
+        ].teamMemberSmtIds.append(learner_id)
+        payload.learners[
+            learner_lookup[learner_id]
+        ].labsProject = project_idx
 
-        payload.projects[project_id].teamMemberSmtIds.append(learner.lambdaId)
-        learner.labsProject = get_team_name(payload.projects[project_id])
+    for ds_project_id in ds_project_ids:
+        ds_tpm = ds_tpms.pop()
+        while ds_tpm.lambdaId in placed:
+            ds_tpm = ds_tpms.pop()
+        place_learner(ds_tpm.lambdaId, ds_project_id)
+
+    for web_project_id in web_project_ids:
+        web_tpm = web_tpms.pop()
+        while web_tpm.lambdaId in placed:
+            web_tpm = web_tpms.pop()
+        place_learner(web_tpm.lambdaId, web_project_id)
+
+    for project_id in project_ids:
+        web_tpm = web_tpms.pop()
+        while web_tpm.lambdaId in placed:
+            web_tpm = web_tpms.pop()
+        place_learner(web_tpm.lambdaId, project_id)
+
+    for learner in payload.learners:
+        if learner.lambdaId not in placed:
+            if learner.track == "DS":
+                smallest = min(
+                    filter(lambda x: "DS" in x.tracks, payload.projects),
+                    key=lambda x: len(x.teamMemberSmtIds),
+                )
+                place_learner(learner.lambdaId, smallest.id)
+            else:
+                smallest = min(
+                    payload.projects,
+                    key=lambda x: len(x.teamMemberSmtIds),
+                )
+                place_learner(learner.lambdaId, smallest.id)
 
     return payload

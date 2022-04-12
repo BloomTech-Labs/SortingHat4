@@ -155,30 +155,143 @@ class Payload(BaseModel):
         tpmInterest3=randint(1, 4),
         tpmInterest4=randint(1, 4),
     ) for _ in range(45)]
+    learners.extend([
+        Learner(
+            lambdaId="001",
+            name=NameGenerator.generate_name(),
+            track="Web",
+            labsProject="Test Product - A",
+            gitExpertise=randint(1, 5),
+            dockerExpertise=randint(1, 5),
+            playByEar=randint(1, 5),
+            detailOriented=randint(1, 5),
+            speakUpInDiscussions=randint(1, 5),
+            soloOrSocial=choice(["A", "B"]),
+            meaningOrValue=choice(["A", "B"]),
+            feelsRightOrMakesSense=choice(["A", "B"]),
+            favoriteOrCollect=choice(["A", "B"]),
+            tpmSkill1=choice(["A", "B", "C"]),  # B
+            tpmSkill2=choice(["A", "B", "C"]),  # B
+            tpmSkill3=choice(["A", "B", "C"]),  # C
+            tpmInterest1=randint(1, 4),
+            tpmInterest2=randint(1, 4),
+            tpmInterest3=randint(1, 4),
+            tpmInterest4=randint(1, 4),
+        ),
+        Learner(
+            lambdaId="002",
+            name=NameGenerator.generate_name(),
+            track="Web",
+            labsProject="Test Product - A",
+            gitExpertise=randint(1, 5),
+            dockerExpertise=randint(1, 5),
+            playByEar=randint(1, 5),
+            detailOriented=randint(1, 5),
+            speakUpInDiscussions=randint(1, 5),
+            soloOrSocial=choice(["A", "B"]),
+            meaningOrValue=choice(["A", "B"]),
+            feelsRightOrMakesSense=choice(["A", "B"]),
+            favoriteOrCollect=choice(["A", "B"]),
+            tpmSkill1=choice(["A", "B", "C"]),  # B
+            tpmSkill2=choice(["A", "B", "C"]),  # B
+            tpmSkill3=choice(["A", "B", "C"]),  # C
+            tpmInterest1=randint(1, 4),
+            tpmInterest2=randint(1, 4),
+            tpmInterest3=randint(1, 4),
+            tpmInterest4=randint(1, 4),
+        ),
+        Learner(
+            lambdaId="003",
+            name=NameGenerator.generate_name(),
+            track="Web",
+            labsProject="Test Product - A",
+            gitExpertise=randint(1, 5),
+            dockerExpertise=randint(1, 5),
+            playByEar=randint(1, 5),
+            detailOriented=randint(1, 5),
+            speakUpInDiscussions=randint(1, 5),
+            soloOrSocial=choice(["A", "B"]),
+            meaningOrValue=choice(["A", "B"]),
+            feelsRightOrMakesSense=choice(["A", "B"]),
+            favoriteOrCollect=choice(["A", "B"]),
+            tpmSkill1=choice(["A", "B", "C"]),  # B
+            tpmSkill2=choice(["A", "B", "C"]),  # B
+            tpmSkill3=choice(["A", "B", "C"]),  # C
+            tpmInterest1=randint(1, 4),
+            tpmInterest2=randint(1, 4),
+            tpmInterest3=randint(1, 4),
+            tpmInterest4=randint(1, 4),
+        ),
+        Learner(
+            lambdaId="004",
+            name=NameGenerator.generate_name(),
+            track="Web",
+            labsProject="Test Product - A",
+            gitExpertise=randint(1, 5),
+            dockerExpertise=randint(1, 5),
+            playByEar=randint(1, 5),
+            detailOriented=randint(1, 5),
+            speakUpInDiscussions=randint(1, 5),
+            soloOrSocial=choice(["A", "B"]),
+            meaningOrValue=choice(["A", "B"]),
+            feelsRightOrMakesSense=choice(["A", "B"]),
+            favoriteOrCollect=choice(["A", "B"]),
+            tpmSkill1=choice(["A", "B", "C"]),  # B
+            tpmSkill2=choice(["A", "B", "C"]),  # B
+            tpmSkill3=choice(["A", "B", "C"]),  # C
+            tpmInterest1=randint(1, 4),
+            tpmInterest2=randint(1, 4),
+            tpmInterest3=randint(1, 4),
+            tpmInterest4=randint(1, 4),
+        ),
+        Learner(
+            lambdaId="005",
+            name=NameGenerator.generate_name(),
+            track="Web",
+            labsProject="Test Product - A",
+            gitExpertise=randint(1, 5),
+            dockerExpertise=randint(1, 5),
+            playByEar=randint(1, 5),
+            detailOriented=randint(1, 5),
+            speakUpInDiscussions=randint(1, 5),
+            soloOrSocial=choice(["A", "B"]),
+            meaningOrValue=choice(["A", "B"]),
+            feelsRightOrMakesSense=choice(["A", "B"]),
+            favoriteOrCollect=choice(["A", "B"]),
+            tpmSkill1=choice(["A", "B", "C"]),  # B
+            tpmSkill2=choice(["A", "B", "C"]),  # B
+            tpmSkill3=choice(["A", "B", "C"]),  # C
+            tpmInterest1=randint(1, 4),
+            tpmInterest2=randint(1, 4),
+            tpmInterest3=randint(1, 4),
+            tpmInterest4=randint(1, 4),
+        ),
+    ])
     projects: List[Project] = [
         Project(
-            id=generate_uuid(8),
+            id="Test Product - A",
             product="Test Product",
             teamCode="A",
             releaseManager=NameGenerator.generate_name(),
             tracks=["Web"],
+            teamMemberSmtIds=["001", "002", "003", "004", "005"]
         ),
         Project(
-            id=generate_uuid(8),
+            id="Test Product - B",
             product="Test Product",
             teamCode="B",
             releaseManager=NameGenerator.generate_name(),
             tracks=["Web", "DS"]
         ),
         Project(
-            id=generate_uuid(8),
+            id="Test Product - C",
             product="Test Product",
             teamCode="C",
             releaseManager=NameGenerator.generate_name(),
             tracks=["Web", "DS"]
         ),
         Project(
-            id=generate_uuid(8),
+            id="Test Product - D",
             product="Test Product",
             teamCode="D",
             releaseManager=NameGenerator.generate_name(),

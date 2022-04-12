@@ -9,7 +9,7 @@ from app.logger import MongoDB
 
 API = FastAPI(
     title="SortingHat4",
-    version="4.0.9",
+    version="4.1.0rc1",
     docs_url="/",
     description="<h2>Truffle Shuffle Edition</h2>"
 )
@@ -43,14 +43,10 @@ async def logs(query: Optional[Dict] = None):
 
 @API.post("/sortinghat")
 async def sortinghat(payload: Payload) -> Payload:
-    pre_sort_learners = list(map(vars, payload.learners))
-    pre_sort_projects = list(map(vars, payload.projects))
     result: Payload = hat_trick(payload)
     API.logger.insert({
         "metadata": await info(),
         "projects": list(map(vars, result.projects)),
         "learners": list(map(vars, result.learners)),
-        "presort-learners": pre_sort_learners,
-        "presort-projects": pre_sort_projects,
     })
     return result
