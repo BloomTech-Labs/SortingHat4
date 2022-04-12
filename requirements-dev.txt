@@ -2,4 +2,3 @@ requests
 jupyter
 pandas
 plotly
-scikit-learn
