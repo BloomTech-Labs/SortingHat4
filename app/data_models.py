@@ -154,7 +154,7 @@ class Payload(BaseModel):
         tpmInterest2=randint(1, 4),
         tpmInterest3=randint(1, 4),
         tpmInterest4=randint(1, 4),
-    ) for _ in range(45)]
+    ) for _ in range(2)]
     learners.extend([
         Learner(
             lambdaId="001",

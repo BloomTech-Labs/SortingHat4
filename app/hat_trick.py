@@ -34,48 +34,51 @@ def hat_trick(payload: Payload) -> Payload:
             placed.add(learner.lambdaId)
 
     def place_learner(learner_id: str, project_idx: str):
-        placed.add(learner_id)
-        payload.projects[
-            project_lookup[project_idx]
-        ].teamMemberSmtIds.append(learner_id)
-        payload.learners[
-            learner_lookup[learner_id]
-        ].labsProject = project_idx
+        if learner_id not in placed:
+            placed.add(learner_id)
+            payload.projects[
+                project_lookup[project_idx]
+            ].teamMemberSmtIds.append(learner_id)
+            payload.learners[
+                learner_lookup[learner_id]
+            ].labsProject = project_idx
 
-    for ds_project_id in ds_project_ids:
-        if ds_tpms:
-            ds_tpm = ds_tpms.pop()
-            while ds_tpm.lambdaId in placed and ds_tpms:
+    if len(payload.learners) >= len(payload.projects):
+
+        for ds_project_id in ds_project_ids:
+            if ds_tpms:
                 ds_tpm = ds_tpms.pop()
-            place_learner(ds_tpm.lambdaId, ds_project_id)
+                while ds_tpm.lambdaId in placed and ds_tpms:
+                    ds_tpm = ds_tpms.pop()
+                place_learner(ds_tpm.lambdaId, ds_project_id)
 
-    for web_project_id in web_project_ids:
-        if web_tpms:
-            web_tpm = web_tpms.pop()
-            while web_tpm.lambdaId in placed and web_tpms:
+        for web_project_id in web_project_ids:
+            if web_tpms:
                 web_tpm = web_tpms.pop()
-            place_learner(web_tpm.lambdaId, web_project_id)
+                while web_tpm.lambdaId in placed and web_tpms:
+                    web_tpm = web_tpms.pop()
+                place_learner(web_tpm.lambdaId, web_project_id)
 
-    for project_id in project_ids:
-        if web_tpms:
-            web_tpm = web_tpms.pop()
-            while web_tpm.lambdaId in placed and web_tpms:
-                web_tpm = web_tpms.pop()
-            place_learner(web_tpm.lambdaId, project_id)
+        if len(payload.learners) >= len(payload.projects) * 2:
+            for project_id in project_ids:
+                if web_tpms:
+                    web_tpm = web_tpms.pop()
+                    while web_tpm.lambdaId in placed and web_tpms:
+                        web_tpm = web_tpms.pop()
+                    place_learner(web_tpm.lambdaId, project_id)
 
     for learner in payload.learners:
-        if learner.lambdaId not in placed:
-            if learner.track == "DS":
-                smallest = min(
-                    filter(lambda x: "DS" in x.tracks, payload.projects),
-                    key=lambda x: len(x.teamMemberSmtIds),
-                )
-                place_learner(learner.lambdaId, smallest.id)
-            else:
-                smallest = min(
-                    payload.projects,
-                    key=lambda x: len(x.teamMemberSmtIds),
-                )
-                place_learner(learner.lambdaId, smallest.id)
+        if learner.track == "DS":
+            smallest = min(
+                filter(lambda x: "DS" in x.tracks, payload.projects),
+                key=lambda x: len(x.teamMemberSmtIds),
+            )
+            place_learner(learner.lambdaId, smallest.id)
+        else:
+            smallest = min(
+                payload.projects,
+                key=lambda x: len(x.teamMemberSmtIds),
+            )
+            place_learner(learner.lambdaId, smallest.id)
 
     return payload
