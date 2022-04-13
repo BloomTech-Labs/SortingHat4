@@ -283,18 +283,18 @@ class Payload(BaseModel):
             releaseManager=NameGenerator.generate_name(),
             tracks=["Web", "DS"]
         ),
-        Project(
-            id="Test Product - C",
-            product="Test Product",
-            teamCode="C",
-            releaseManager=NameGenerator.generate_name(),
-            tracks=["Web", "DS"]
-        ),
-        Project(
-            id="Test Product - D",
-            product="Test Product",
-            teamCode="D",
-            releaseManager=NameGenerator.generate_name(),
-            tracks=["Web", "DS"]
-        ),
+        # Project(
+        #     id="Test Product - C",
+        #     product="Test Product",
+        #     teamCode="C",
+        #     releaseManager=NameGenerator.generate_name(),
+        #     tracks=["Web", "DS"]
+        # ),
+        # Project(
+        #     id="Test Product - D",
+        #     product="Test Product",
+        #     teamCode="D",
+        #     releaseManager=NameGenerator.generate_name(),
+        #     tracks=["Web", "DS"]
+        # ),
     ]
