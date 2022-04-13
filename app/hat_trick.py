@@ -43,22 +43,25 @@ def hat_trick(payload: Payload) -> Payload:
         ].labsProject = project_idx
 
     for ds_project_id in ds_project_ids:
-        ds_tpm = ds_tpms.pop()
-        while ds_tpm.lambdaId in placed:
+        if ds_tpms:
             ds_tpm = ds_tpms.pop()
-        place_learner(ds_tpm.lambdaId, ds_project_id)
+            while ds_tpm.lambdaId in placed and ds_tpms:
+                ds_tpm = ds_tpms.pop()
+            place_learner(ds_tpm.lambdaId, ds_project_id)
 
     for web_project_id in web_project_ids:
-        web_tpm = web_tpms.pop()
-        while web_tpm.lambdaId in placed:
+        if web_tpms:
             web_tpm = web_tpms.pop()
-        place_learner(web_tpm.lambdaId, web_project_id)
+            while web_tpm.lambdaId in placed and web_tpms:
+                web_tpm = web_tpms.pop()
+            place_learner(web_tpm.lambdaId, web_project_id)
 
     for project_id in project_ids:
-        web_tpm = web_tpms.pop()
-        while web_tpm.lambdaId in placed:
+        if web_tpms:
             web_tpm = web_tpms.pop()
-        place_learner(web_tpm.lambdaId, project_id)
+            while web_tpm.lambdaId in placed and web_tpms:
+                web_tpm = web_tpms.pop()
+            place_learner(web_tpm.lambdaId, project_id)
 
     for learner in payload.learners:
         if learner.lambdaId not in placed:
