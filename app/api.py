@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.data_models import Payload
+from app.payload import example_payload
 from app.sorting_hat import sorting_hat
 from app.logger import MongoDB
 
@@ -43,7 +44,7 @@ async def logs(query: Optional[Dict] = None):
 
 
 @API.post("/sortinghat")
-async def sortinghat(payload: Payload) -> Payload:
+async def sortinghat(payload: Payload = example_payload) -> Payload:
     result: Payload = sorting_hat(payload)
     API.logger.insert({
         "metadata": await info(),
