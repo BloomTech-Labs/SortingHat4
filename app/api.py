@@ -3,15 +3,16 @@ from typing import Dict, Optional
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 from app.data_models import Payload
-from app.hat_trick import hat_trick
+from app.sorting_hat import sorting_hat
 from app.logger import MongoDB
 
 API = FastAPI(
     title="SortingHat4",
-    version="4.1.0rc3",
+    version="4.2.0",
     docs_url="/",
-    description="<h2>Truffle Shuffle Edition</h2>"
+    description="<h2>Dumbledore Edition</h2>"
 )
 API.logger = MongoDB()
 API.add_middleware(
@@ -43,7 +44,7 @@ async def logs(query: Optional[Dict] = None):
 
 @API.post("/sortinghat")
 async def sortinghat(payload: Payload) -> Payload:
-    result: Payload = hat_trick(payload)
+    result: Payload = sorting_hat(payload)
     API.logger.insert({
         "metadata": await info(),
         "projects": list(map(vars, result.projects)),
