@@ -1,6 +1,7 @@
-import datetime
+from datetime import datetime
 from typing import Dict, Optional
 
+import pytz
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -34,7 +35,7 @@ async def info():
             "version": API.version,
         },
         "logger": API.logger.info,
-        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "timestamp": datetime.now(pytz.timezone('US/Pacific')).isoformat(),
     }
 
 
