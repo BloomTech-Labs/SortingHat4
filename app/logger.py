@@ -60,5 +60,5 @@ class MongoDB:
 
 if __name__ == '__main__':
     db = MongoDB()
-    date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    date = datetime.datetime.now().isoformat()
     db.backup(f"backups/{date}.json")
