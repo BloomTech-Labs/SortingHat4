@@ -45,7 +45,7 @@ async def logs(query: Optional[Dict] = None):
 
 
 @API.post("/sortinghat")
-async def sortinghat(payload: Payload = example_payload) -> Payload:
+async def sortinghat(payload: Payload = example_payload()) -> Payload:
     result: Payload = sorting_hat(payload)
     API.logger.insert({
         "metadata": await info(),
@@ -59,3 +59,8 @@ async def sortinghat(payload: Payload = example_payload) -> Payload:
         },
     })
     return result
+
+
+@API.get("/schema")
+async def schema():
+    return Payload.schema()
