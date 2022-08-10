@@ -9,8 +9,8 @@ def place(learner: Learner, projects: List[Project]):
     track_projects = filter(lambda team: learner.track in team.tracks, projects)
     target = min(track_projects, key=lambda team: len(team.teamMemberSmtIds))
 
-    if len(target.teamMemberSmtIds) >= 12:
-        target = make_new_team(target, projects)
+    # if len(target.teamMemberSmtIds) >= 12:
+    #     target = make_new_team(target, projects)
 
     target.teamMemberSmtIds.append(learner.lambdaId)
     learner.labsProject = target.id
@@ -26,7 +26,7 @@ def sorting_hat(payload: Payload) -> Payload:
     for learner in learners:
         if not learner.labsProject:
             place(learner, projects)
-    projects = remove_empty_teams(projects)
+    # projects = remove_empty_teams(projects)
     return Payload(learners=learners, projects=projects)
 
 

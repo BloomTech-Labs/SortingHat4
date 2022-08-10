@@ -80,10 +80,10 @@ def example_payload():
         random_returning_learner("Web", "Test Product - A"),
         random_returning_learner("Web", "Test Product - A"),
         random_returning_learner("Web", "Test Product - A"),
-        random_returning_learner("BD", "Test Product - A"),
-        random_returning_learner("BD", "Test Product - A"),
-        random_returning_learner("BD", "Test Product - A"),
-        random_returning_learner("BD", "Test Product - A"),
+        random_returning_learner("BD", "Test Product - B"),
+        random_returning_learner("BD", "Test Product - B"),
+        random_returning_learner("BD", "Test Product - B"),
+        random_returning_learner("BD", "Test Product - B"),
         random_returning_learner("Web", "Test Product - B"),
         random_returning_learner("Web", "Test Product - B"),
         random_returning_learner("Web", "Test Product - B"),
@@ -92,19 +92,27 @@ def example_payload():
         random_returning_learner("Web", "Test Product - B"),
         random_returning_learner("Web", "Test Product - B"),
         random_returning_learner("Web", "Test Product - B"),
-        random_returning_learner("DS", "Test Product - B"),
-        random_returning_learner("DS", "Test Product - B"),
-        random_returning_learner("DS", "Test Product - B"),
-        random_returning_learner("DS", "Test Product - B"),
+        random_returning_learner("DS", "Test Product - A"),
+        random_returning_learner("DS", "Test Product - A"),
+        random_returning_learner("DS", "Test Product - A"),
+        random_returning_learner("DS", "Test Product - A"),
     ]
     projects = [
-       random_project("Test Product", "A", ["Web", "BD"], [
+        random_project("Test Product", "A", ["Web", "DS"], [
            learner.lambdaId for learner in learners
            if "Test Product - A" == learner.labsProject
-       ]),
-       random_project("Test Product", "B", ["Web", "DS"], [
+        ]),
+        random_project("Test Product", "B", ["Web", "BD"], [
            learner.lambdaId for learner in learners
            if "Test Product - B" == learner.labsProject
-       ]),
+        ]),
+        random_project("Test Product", "C", ["Web", "BD"], [
+            learner.lambdaId for learner in learners
+            if "Test Product - C" == learner.labsProject
+        ]),
+        random_project("Test Product", "D", ["Web", "DS"], [
+            learner.lambdaId for learner in learners
+            if "Test Product - D" == learner.labsProject
+        ]),
     ]
     return Payload(learners=learners, projects=projects)
