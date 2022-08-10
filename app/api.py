@@ -12,9 +12,9 @@ from app.logger import MongoDB
 
 API = FastAPI(
     title="SortingHat4",
-    version="4.2.0",
+    version="4.3.0",
     docs_url="/",
-    description="<h2>Dumbledore Edition</h2>"
+    description="<h2>Raven Claw</h2>"
 )
 API.logger = MongoDB()
 API.add_middleware(
@@ -49,7 +49,13 @@ async def sortinghat(payload: Payload = example_payload) -> Payload:
     result: Payload = sorting_hat(payload)
     API.logger.insert({
         "metadata": await info(),
-        "projects": list(map(vars, result.projects)),
-        "learners": list(map(vars, result.learners)),
+        "before": {
+            "projects": list(map(vars, payload.projects)),
+            "learners": list(map(vars, payload.learners)),
+        },
+        "after": {
+            "projects": list(map(vars, result.projects)),
+            "learners": list(map(vars, result.learners)),
+        },
     })
     return result

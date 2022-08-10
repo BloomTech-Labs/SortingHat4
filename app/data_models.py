@@ -7,6 +7,7 @@ class Learner(BaseModel):
     lambdaId: str
     name: str
     track: str
+    storyPoints: Optional[int] = 0
     labsProject: Optional[str] = ""
     gitExpertise: Optional[int] = 0
     dockerExpertise: Optional[int] = 0
@@ -97,8 +98,16 @@ class Project(BaseModel):
     tracks: List[str]
     releaseManager: str
     teamMemberSmtIds: List[str] = []
+    storyPointTotal: Optional[int] = 0
 
 
 class Payload(BaseModel):
     learners: List[Learner]
     projects: List[Project]
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        for learner in self.learners:
+            for project in self.projects:
+                if project.id == learner.labsProject:
+                    project.storyPointTotal += learner.storyPoints
