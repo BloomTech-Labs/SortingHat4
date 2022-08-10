@@ -62,5 +62,5 @@ async def sortinghat(payload: Payload = example_payload()) -> Payload:
 
 
 @API.get("/schema")
-async def schema():
+async def payload_schema():
     return Payload.schema()
