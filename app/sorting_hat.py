@@ -12,7 +12,7 @@ def place(learner: Learner, projects: List[Project]):
     # if len(target.teamMemberSmtIds) >= 12:
     #     target = make_new_team(target, projects)
 
-    target.teamMemberSmtIds.append(learner.lambdaId)
+    target.teamMemberSmtIds.append(learner.oktaId)
     learner.labsProject = target.id
 
 

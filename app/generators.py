@@ -1,7 +1,6 @@
-import string
+import uuid
 from collections import deque
-from itertools import chain
-from math import sqrt, ceil, floor
+from math import sqrt
 from random import shuffle, triangular, choices, randint
 from typing import Any, Callable, List
 
@@ -20,15 +19,8 @@ class TruffleShuffle:
         return self.data[-1]
 
 
-def random_uuid(n_len: int = 16):
-    n1 = ceil(n_len / 2)
-    n2 = floor(n_len / 2)
-    prefix = choices(string.ascii_letters, k=n1)
-    suffix = map(str, choices(range(0, 9), k=n2))
-    uuid_list = list(chain(prefix, suffix))
-    shuffle(uuid_list)
-    uuid = "".join(uuid_list)
-    return uuid
+def random_uuid() -> str:
+    return str(uuid.uuid4())
 
 
 def percent_true(num: int = 50) -> bool:

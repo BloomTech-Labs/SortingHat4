@@ -8,7 +8,7 @@ from app.generators import random_uuid, random_name
 
 def random_learner(track: str):
     return Learner(
-        lambdaId=random_uuid(),
+        oktaId=random_uuid(),
         name=random_name(),
         track=track,
         tpmSkill1="B",
@@ -29,7 +29,7 @@ def random_learner(track: str):
 
 def random_returning_learner(track: str, labs_project: str):
     return Learner(
-        lambdaId=random_uuid(),
+        oktaId=random_uuid(),
         name=random_name(),
         track=track,
         storyPoints=randint(1, 21),
@@ -50,7 +50,9 @@ def random_returning_learner(track: str, labs_project: str):
     )
 
 
-def random_project(product: str, team_code: str, tracks: List[str],
+def random_project(product: str,
+                   team_code: str,
+                   tracks: List[str],
                    members: List[str]):
     return Project(
         id=f"{product} - {team_code}",
@@ -99,20 +101,24 @@ def example_payload():
     ]
     projects = [
         random_project("Test Product", "A", ["Web", "DS"], [
-           learner.lambdaId for learner in learners
+           learner.oktaId for learner in learners
            if "Test Product - A" == learner.labsProject
         ]),
         random_project("Test Product", "B", ["Web", "BD"], [
-           learner.lambdaId for learner in learners
+           learner.oktaId for learner in learners
            if "Test Product - B" == learner.labsProject
         ]),
         random_project("Test Product", "C", ["Web", "BD"], [
-            learner.lambdaId for learner in learners
+            learner.oktaId for learner in learners
             if "Test Product - C" == learner.labsProject
         ]),
         random_project("Test Product", "D", ["Web", "DS"], [
-            learner.lambdaId for learner in learners
+            learner.oktaId for learner in learners
             if "Test Product - D" == learner.labsProject
         ]),
     ]
     return Payload(learners=learners, projects=projects)
+
+
+if __name__ == '__main__':
+    print(example_payload())
