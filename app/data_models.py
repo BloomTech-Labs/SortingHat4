@@ -49,3 +49,12 @@ SoloSocial = Literal["solo", "social"]
 MeaningValue = Literal["meaning", "value"]
 FeelSense = Literal["feel", "sense"]
 FavoriteCollect = Literal["favorite", "collect"]
+
+
+if __name__ == '__main__':
+    learner = Learner(
+        oktaId="",
+        name="",
+        track="",
+    )
+    print(dict(learner))

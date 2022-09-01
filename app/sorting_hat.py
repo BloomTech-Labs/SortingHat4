@@ -5,15 +5,25 @@ from string import ascii_uppercase
 from app.data_models import Payload, Project, Learner
 
 
-def place(learner: Learner, projects: List[Project]):
+def place(learner: Learner, projects: List[Project], learners: List[Learner]):
+    points_by_id = map_id_to_points(learners)
     track_projects = filter(lambda team: learner.track in team.tracks, projects)
-    target = min(track_projects, key=lambda team: len(team.teamMemberSmtIds))
+    target = min(track_projects, key=lambda team: len([
+        Id for Id in team.teamMemberSmtIds
+        if points_by_id.get(Id, 0) <= 12
+    ]))
+
+    # If more than one min target exist use survey data to break the tie
 
     # if len(target.teamMemberSmtIds) >= 12:
     #     target = make_new_team(target, projects)
 
     target.teamMemberSmtIds.append(learner.oktaId)
     learner.labsProject = target.id
+
+
+def map_id_to_points(learners: List[Learner]):
+    return {learner.oktaId: learner.storyPoints for learner in learners}
 
 
 def sorting_hat(payload: Payload) -> Payload:
@@ -25,7 +35,7 @@ def sorting_hat(payload: Payload) -> Payload:
     )
     for learner in learners:
         if not learner.labsProject:
-            place(learner, projects)
+            place(learner, projects, learners)
     # projects = remove_empty_teams(projects)
     return Payload(learners=learners, projects=projects)
 
