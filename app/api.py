@@ -14,9 +14,9 @@ from app.logger import MongoDB
 
 API = FastAPI(
     title="SortingHat4",
-    version="4.4.3",
+    version="4.4.4",
     docs_url="/",
-    description="<h2>Phoenix</h2>"
+    description="<h2>Omega</h2>"
 )
 API.logger = MongoDB()
 API.add_middleware(
