@@ -10,7 +10,7 @@ def place(learner: Learner, projects: List[Project], learners: List[Learner]):
     track_projects = filter(lambda team: learner.track in team.tracks, projects)
     target = min(track_projects, key=lambda team: len([
         Id for Id in team.teamMemberSmtIds
-        if points_by_id.get(Id, 0) <= 12
+        if points_by_id.get(Id, 0) < 14
     ]))
 
     # If more than one min target exist use survey data to break the tie
