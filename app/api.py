@@ -41,19 +41,26 @@ async def info():
 
 @API.post("/sortinghat")
 async def sortinghat(payload: Payload = example_payload()) -> Payload:
-    result: Payload = sorting_hat(payload)
-    API.logger.insert({
-        "metadata": await info(),
-        "before": {
-            "projects": list(map(vars, payload.projects)),
-            "learners": list(map(vars, payload.learners)),
-        },
-        "after": {
-            "projects": list(map(vars, result.projects)),
-            "learners": list(map(vars, result.learners)),
-        },
-    })
-    return result
+    try:
+        result: Payload = sorting_hat(payload)
+        API.logger.insert({
+            "metadata": await info(),
+            "before": {
+                "projects": list(map(vars, payload.projects)),
+                "learners": list(map(vars, payload.learners)),
+            },
+            "after": {
+                "projects": list(map(vars, result.projects)),
+                "learners": list(map(vars, result.learners)),
+            },
+        })
+        return result
+    except Exception as error:
+        API.logger.insert({
+            "metadata": await info(),
+            "payload": payload,
+            "error": error,
+        })
 
 
 @API.get("/schema")

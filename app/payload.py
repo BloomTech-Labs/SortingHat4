@@ -70,49 +70,49 @@ def example_payload():
         random_learner("Web"),
         random_learner("Web"),
         random_learner("Web"),
-        random_learner("DS"),
-        random_learner("DS"),
-        random_learner("BD"),
-        random_learner("BD"),
+        random_learner("Data Science"),
+        random_learner("Data Science"),
+        random_learner("Backend"),
+        random_learner("Backend"),
         random_returning_learner("Web", "Test Product - A"),
         random_returning_learner("Web", "Test Product - A"),
         random_returning_learner("Web", "Test Product - A"),
         random_returning_learner("Web", "Test Product - A"),
-        random_returning_learner("Web", "Test Product - A"),
-        random_returning_learner("Web", "Test Product - A"),
-        random_returning_learner("Web", "Test Product - A"),
-        random_returning_learner("Web", "Test Product - A"),
-        random_returning_learner("BD", "Test Product - B"),
-        random_returning_learner("BD", "Test Product - B"),
-        random_returning_learner("BD", "Test Product - B"),
-        random_returning_learner("BD", "Test Product - B"),
+        random_returning_learner("Data Science", "Test Product - A"),
+        random_returning_learner("Data Science", "Test Product - A"),
+        random_returning_learner("Backend", "Test Product - B"),
+        random_returning_learner("Backend", "Test Product - B"),
         random_returning_learner("Web", "Test Product - B"),
         random_returning_learner("Web", "Test Product - B"),
         random_returning_learner("Web", "Test Product - B"),
         random_returning_learner("Web", "Test Product - B"),
-        random_returning_learner("Web", "Test Product - B"),
-        random_returning_learner("Web", "Test Product - B"),
-        random_returning_learner("Web", "Test Product - B"),
-        random_returning_learner("Web", "Test Product - B"),
-        random_returning_learner("DS", "Test Product - A"),
-        random_returning_learner("DS", "Test Product - A"),
-        random_returning_learner("DS", "Test Product - A"),
-        random_returning_learner("DS", "Test Product - A"),
+        random_returning_learner("Web", "Test Product - C"),
+        random_returning_learner("Web", "Test Product - C"),
+        random_returning_learner("Web", "Test Product - C"),
+        random_returning_learner("Web", "Test Product - C"),
+        random_returning_learner("Data Science", "Test Product - C"),
+        random_returning_learner("Data Science", "Test Product - C"),
+        random_returning_learner("Backend", "Test Product - D"),
+        random_returning_learner("Backend", "Test Product - D"),
+        random_returning_learner("Web", "Test Product - D"),
+        random_returning_learner("Web", "Test Product - D"),
+        random_returning_learner("Web", "Test Product - D"),
+        random_returning_learner("Web", "Test Product - D"),
     ]
     projects = [
-        random_project("Test Product", "A", ["Web", "DS"], [
+        random_project("Test Product", "A", ["Web", "Data Science"], [
            learner.oktaId for learner in learners
            if "Test Product - A" == learner.labsProject
         ]),
-        random_project("Test Product", "B", ["Web", "BD"], [
+        random_project("Test Product", "B", ["Web", "Backend"], [
            learner.oktaId for learner in learners
            if "Test Product - B" == learner.labsProject
         ]),
-        random_project("Test Product", "C", ["Web", "BD"], [
+        random_project("Test Product", "C", ["Web", "Backend"], [
             learner.oktaId for learner in learners
             if "Test Product - C" == learner.labsProject
         ]),
-        random_project("Test Product", "D", ["Web", "DS"], [
+        random_project("Test Product", "D", ["Web", "Data Science"], [
             learner.oktaId for learner in learners
             if "Test Product - D" == learner.labsProject
         ]),

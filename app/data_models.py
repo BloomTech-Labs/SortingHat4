@@ -49,3 +49,5 @@ SoloSocial = Literal["solo", "social"]
 MeaningValue = Literal["meaning", "value"]
 FeelSense = Literal["feel", "sense"]
 FavoriteCollect = Literal["favorite", "collect"]
+
+Track = Literal["Web", "Data Science", "Backend"]

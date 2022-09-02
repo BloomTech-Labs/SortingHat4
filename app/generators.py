@@ -30,8 +30,8 @@ def percent_true(num: int = 50) -> bool:
 def random_track() -> str:
     tracks = {
         "Web": 60,
-        "DS": 40,
-        "BD": 0,
+        "Data Science": 40,
+        "Backend": 0,
     }
     track, *_ = choices(*zip(*tracks.items()))
     return track
