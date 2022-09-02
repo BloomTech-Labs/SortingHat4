@@ -12,9 +12,9 @@ from app.logger import MongoDB
 
 API = FastAPI(
     title="SortingHat4",
-    version="4.4.1",
+    version="4.4.2",
     docs_url="/",
-    description="<h2>Raven Claw</h2>"
+    description="<h2>Phoenix</h2>"
 )
 API.logger = MongoDB()
 API.add_middleware(
@@ -37,11 +37,6 @@ async def info():
         "logger": API.logger.info,
         "timestamp": datetime.now(pytz.timezone('US/Pacific')).isoformat(),
     }
-
-
-@API.post("/logs")
-async def logs(query: Optional[Dict] = None):
-    return list(API.logger.find_all(query))
 
 
 @API.post("/sortinghat")
