@@ -1,9 +1,11 @@
 from datetime import datetime
-from typing import Dict, Optional
+from typing import Dict, Union
 
 import pytz
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.exceptions import HTTPException
+
 
 from app.data_models import Payload
 from app.payload import example_payload
@@ -40,7 +42,7 @@ async def info():
 
 
 @API.post("/sortinghat")
-async def sortinghat(payload: Payload = example_payload()) -> Payload:
+async def sortinghat(payload: Payload = example_payload()) -> Union[Payload, HTTPException]:
     try:
         result: Payload = sorting_hat(payload)
         API.logger.insert({
@@ -61,6 +63,7 @@ async def sortinghat(payload: Payload = example_payload()) -> Payload:
             "payload": payload,
             "error": error,
         })
+        return HTTPException(500, "Unknown error detected, try again")
 
 
 @API.get("/schema")
