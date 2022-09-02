@@ -12,7 +12,7 @@ from app.logger import MongoDB
 
 API = FastAPI(
     title="SortingHat4",
-    version="4.4.2",
+    version="4.4.3",
     docs_url="/",
     description="<h2>Phoenix</h2>"
 )
