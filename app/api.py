@@ -31,12 +31,8 @@ API.add_middleware(
 @API.get("/info")
 async def info():
     return {
-        "ds_api": {
-            "platform": "FastAPI",
-            "title": API.title,
-            "version": API.version,
-        },
-        "logger": API.logger.info,
+        "title": API.title,
+        "version": API.version,
         "timestamp": datetime.now(pytz.timezone('US/Pacific')).isoformat(),
     }
 
