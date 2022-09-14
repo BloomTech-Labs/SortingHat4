@@ -14,9 +14,9 @@ from app.logger import MongoDB
 
 API = FastAPI(
     title="SortingHat4",
-    version="4.4.4",
+    version="4.4.5",
     docs_url="/",
-    description="<h2>Omega</h2>"
+    description="<h2>Zeta</h2>"
 )
 API.logger = MongoDB()
 API.add_middleware(
@@ -60,10 +60,8 @@ async def sortinghat(payload: Payload = example_payload()) -> Union[Payload, HTT
     except Exception as error:
         API.logger.insert({
             "metadata": await info(),
-            "payload": {
-                "projects": list(map(vars, payload.projects)),
-                "learners": list(map(vars, payload.learners)),
-            },
+            "projects": list(map(vars, payload.projects)),
+            "learners": list(map(vars, payload.learners)),
             "error": error,
         })
         return HTTPException(500, "Unknown error detected, try again")
