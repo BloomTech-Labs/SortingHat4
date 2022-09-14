@@ -1,10 +1,10 @@
-app/backups/
-notebooks/
-venv/
+app/backups
+notebooks
+venv
 .env
 payload.json.js
 README.md
 requirements-dev.txt
 scratch.py
-.idea/
+.idea
 run.sh

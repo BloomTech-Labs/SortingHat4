@@ -60,7 +60,10 @@ async def sortinghat(payload: Payload = example_payload()) -> Union[Payload, HTT
     except Exception as error:
         API.logger.insert({
             "metadata": await info(),
-            "payload": payload,
+            "payload": {
+                "projects": list(map(vars, payload.projects)),
+                "learners": list(map(vars, payload.learners)),
+            },
             "error": error,
         })
         return HTTPException(500, "Unknown error detected, try again")
